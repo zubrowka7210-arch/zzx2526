@@ -51,10 +51,46 @@ export default function DetailLeftSection({
         </Link>
       </div>
 
-      <div className="relative w-36 h-36 border border-stone-300 rounded-full flex items-center justify-center mt-8 md:mt-0">
-        <span className="text-4xl font-light tracking-tighter">
-          {scrollPercentage}%
-        </span>
+    </div>
+  );
+}
+
+export function ProgressCircle({ scrollPercentage }) {
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <div className="fixed bottom-8 left-8 md:bottom-12 md:left-12 z-50">
+      <div 
+        className={`w-36 h-36 border border-stone-300 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 hover:border-stone-400 ${
+          scrollPercentage === 100 ? 'hover:bg-stone-100/50' : ''
+        }`}
+        onClick={scrollPercentage === 100 ? handleScrollToTop : undefined}
+      >
+        {scrollPercentage === 100 ? (
+          <div className="flex flex-col items-center">
+            <svg 
+              width="32" 
+              height="32" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="text-stone-600 transition-transform duration-300 hover:-translate-y-1"
+            >
+              <path d="M12 19V5" />
+              <path d="m5 12 7-7 7 7" />
+            </svg>
+            <span className="text-[10px] text-stone-500 mt-1 tracking-wider uppercase">TOP</span>
+          </div>
+        ) : (
+          <span className="text-4xl font-light tracking-tighter">
+            {scrollPercentage}%
+          </span>
+        )}
       </div>
     </div>
   );

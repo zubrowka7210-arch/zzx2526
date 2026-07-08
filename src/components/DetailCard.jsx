@@ -91,18 +91,6 @@ export default function DetailCard({ card, onOpenFullscreen }) {
               全屏
             </div>
           </div>
-          <button
-            onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[calc(50%+8px)] w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-stone-800 hover:bg-white hover:scale-110 transition-all duration-200 z-20"
-          >
-            ←
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); handleNext(); }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[calc(50%+8px)] w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-stone-800 hover:bg-white hover:scale-110 transition-all duration-200 z-20"
-          >
-            →
-          </button>
         </div>
       )}
 

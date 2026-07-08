@@ -155,7 +155,7 @@ export const DETAIL_PAGE_DATA = {
     totalProjects: "03",
     role: "设计师",
     agency: "其他作品",
-    year: "2025",
+    year: "2025-2026",
     awards: "-",
     cards: [
       {

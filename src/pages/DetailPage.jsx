@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
-import DetailLeftSection from "../components/DetailLeftSection.jsx";
+import DetailLeftSection, { ProgressCircle } from "../components/DetailLeftSection.jsx";
 import DetailRightSection from "../components/DetailRightSection.jsx";
 import DetailCard from "../components/DetailCard.jsx";
 import Grainient from "../components/Grainient.jsx";
@@ -96,7 +96,6 @@ const PAGE_GRAINIENT_CONFIG = [
 export default function DetailPage() {
   const { pageId } = useParams();
   const [scrollPercentage, setScrollPercentage] = useState(0);
-  const scrollContainerRef = useRef(null);
   const [fullscreenImages, setFullscreenImages] = useState(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
 
@@ -122,15 +121,9 @@ export default function DetailPage() {
   const grainientConfig = PAGE_GRAINIENT_CONFIG[pageIndex];
 
   useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
-
     const handleScroll = () => {
-      const scrollTop = scrollContainer.scrollTop;
-      const spacerCount = pageData.cards.filter(card => card.isSpacer).length;
-      const spacerHeight = spacerCount * (window.innerHeight * 0.3);
-      const scrollHeight =
-        scrollContainer.scrollHeight - scrollContainer.clientHeight - spacerHeight;
+      const scrollTop = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
       if (scrollHeight > 0) {
         const percentage = Math.round(Math.min((scrollTop / scrollHeight) * 100, 100));
@@ -138,9 +131,9 @@ export default function DetailPage() {
       }
     };
 
-    scrollContainer.addEventListener("scroll", handleScroll);
-    return () => scrollContainer.removeEventListener("scroll", handleScroll);
-  }, [pageData.cards]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -180,12 +173,7 @@ export default function DetailPage() {
         <Navbar />
 
         <main 
-          ref={scrollContainerRef}
-          className="w-full flex-1 flex flex-col md:flex-row justify-between items-stretch my-6 relative z-10 overflow-y-auto"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
+          className="w-full flex-1 flex flex-col md:flex-row justify-between items-stretch my-6 relative z-10"
         >
           <style>{`
             main::-webkit-scrollbar { display: none; }
@@ -216,6 +204,8 @@ export default function DetailPage() {
           />
         </main>
       </div>
+
+      <ProgressCircle scrollPercentage={scrollPercentage} />
 
       {fullscreenImages && (
         <ImageFullscreen
