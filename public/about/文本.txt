@@ -1,0 +1,246 @@
+/* ABOUT */
+
+position: absolute;
+width: 651px;
+height: 330px;
+
+font-family: 'MFZhuoYingNoncommercial';
+font-style: normal;
+font-weight: 400;
+font-size: 220px;
+line-height: 330px;
+/* identical to box height */
+
+color: #17191A;
+
+
+
+/* Ellipse 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 418px;
+height: 418px;
+
+border: 1px solid #525252;
+
+
+/* Ellipse 3 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 418px;
+height: 418px;
+
+border: 1px solid #525252;
+
+
+/* 2021 */
+
+position: absolute;
+width: 176px;
+height: 101px;
+
+font-family: 'Times New Roman';
+font-style: normal;
+font-weight: 400;
+font-size: 88px;
+line-height: 101px;
+
+color: #17191A;
+
+
+
+/* 2025 */
+
+position: absolute;
+width: 176px;
+height: 101px;
+
+font-family: 'Times New Roman';
+font-style: normal;
+font-weight: 400;
+font-size: 88px;
+line-height: 101px;
+
+color: #17191A;
+
+
+
+/* 周子荀 */
+
+position: absolute;
+width: 552px;
+height: 375px;
+
+font-family: 'MFZhuoYingNoncommercial';
+font-style: normal;
+font-weight: 400;
+font-size: 250px;
+line-height: 375px;
+/* identical to box height */
+letter-spacing: -0.11em;
+
+color: #17191A;
+
+
+
+/* 交叉学科背景，创意思维，好奇心驱动，AI工具探索者 */
+
+position: absolute;
+width: 628px;
+height: 35px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 35px;
+/* identical to box height */
+
+color: #252525;
+
+
+
+/* photo */
+
+position: absolute;
+width: 524px;
+height: 524px;
+
+
+
+/* Ellipse 1 */
+
+position: absolute;
+width: 524px;
+height: 524px;
+
+background: #D9D9D9;
+
+
+/* image 9 */
+
+position: absolute;
+width: 523.81px;
+height: 589.92px;
+
+background: url(image.png);
+
+
+/* 本科阶段就读于西北大学智能科学与技术专业，硕士阶段进入华南理工大学设计学院设计学交叉学科方向。 跨学科经历使我能够以工程师的思维判断技术可行性，以设计师的视角洞悉用户真实需求，在产品的构思与落地之间架起桥梁。 目前的研究与实践聚焦于AIGC的产业赋能，致力于探索人工智能在文旅、文创等领域的创新应用与价值转化。 */
+
+position: absolute;
+width: 893px;
+height: 233px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 300;
+font-size: 30px;
+line-height: 39px;
+
+color: #000000;
+
+
+
+/* 电话/微信：18559200715 邮箱：1154611320@qq.com */
+
+position: absolute;
+width: 332px;
+height: 68px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 300;
+font-size: 26px;
+line-height: 34px;
+
+color: #000000;
+
+
+
+/* portfolio 2025-2026 */
+
+position: absolute;
+width: 225px;
+height: 34px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 300;
+font-size: 26px;
+line-height: 34px;
+/* identical to box height */
+
+color: #000000;
+
+
+
+/* 信息科学与技术学院 智能科学与技术专业 */
+
+position: absolute;
+width: 234px;
+height: 68px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 300;
+font-size: 26px;
+line-height: 34px;
+
+color: #000000;
+
+
+
+/* 设计学院 设计学专业 */
+
+position: absolute;
+width: 130px;
+height: 68px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 300;
+font-size: 26px;
+line-height: 34px;
+text-align: center;
+
+color: #000000;
+
+
+
+/* 本科 西北大学 */
+
+position: absolute;
+width: 104px;
+height: 70px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 35px;
+text-align: center;
+
+color: #000000;
+
+
+
+/* 硕士(在读) 华南理工大学 */
+
+position: absolute;
+width: 156px;
+height: 70px;
+
+font-family: 'HYQiHei';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 35px;
+text-align: center;
+
+color: #000000;
+

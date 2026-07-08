@@ -1,0 +1,16 @@
+.scroll-float {
+  overflow: hidden;
+  font-family: 'MFZhuoYingNoncommercial', serif;
+  color: #17191A;
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  font-size: clamp(2.5rem, 10vw, 15.625rem);
+}
+
+.char {
+  display: inline-block;
+}
