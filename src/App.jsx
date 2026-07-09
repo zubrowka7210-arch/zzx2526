@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import Page01 from "./components/Page01.jsx";
-import Page02 from "./components/Page02.jsx";
-import Page03 from "./components/Page03.jsx";
+
+const Page01 = lazy(() => import("./components/Page01.jsx"));
+const Page02 = lazy(() => import("./components/Page02.jsx"));
+const Page03 = lazy(() => import("./components/Page03.jsx"));
 
 const PAGES = [Page01, Page02, Page03];
 const PAGE_IMAGES = [
@@ -14,12 +15,7 @@ const PAGE_IMAGES = [
   "./other/设计2-1.png",
 ];
 
-const preloadImages = () => {
-  PAGE_IMAGES.forEach(src => {
-    const img = new Image();
-    img.src = src;
-  });
-};
+
 
 // 每个页面的颜色配置
 const PAGE_COLORS = [
@@ -62,38 +58,10 @@ export default function App() {
     Math.min(Math.max(initialPage, 0), PAGES.length - 1),
   );
   const [direction, setDirection] = useState(0); // 1: next, -1: prev
-  const [imagesLoaded, setImagesLoaded] = useState(false);
   const total = PAGES.length;
   const isTransitioning = useRef(false);
   const lastScrollTime = useRef(0);
   const accumulatedDelta = useRef(0);
-
-  useEffect(() => {
-    let loadedCount = 0;
-    const totalImages = PAGE_IMAGES.length;
-    
-    if (totalImages === 0) {
-      setImagesLoaded(true);
-      return;
-    }
-    
-    PAGE_IMAGES.forEach(src => {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount >= totalImages) {
-          setImagesLoaded(true);
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount >= totalImages) {
-          setImagesLoaded(true);
-        }
-      };
-      img.src = src;
-    });
-  }, []);
 
   const goNext = () => {
     if (isTransitioning.current) return;
@@ -171,7 +139,9 @@ export default function App() {
               transition={pageTransition}
               className="absolute inset-0 w-full h-full flex flex-col items-center justify-center"
             >
-              <CurrentPage />
+              <Suspense fallback={<div className="text-stone-400">Loading...</div>}>
+                <CurrentPage />
+              </Suspense>
             </motion.div>
           </AnimatePresence>
         </main>

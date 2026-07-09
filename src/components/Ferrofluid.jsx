@@ -298,8 +298,21 @@ const Ferrofluid = ({
       canvas.addEventListener('pointermove', onPointerMove);
     }
 
+    const isVisibleRef = useRef(true);
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+
     const loop = t => {
       rafRef.current = requestAnimationFrame(loop);
+      
+      if (!isVisibleRef.current) return;
+      
       uniforms.iTime.value = t * 0.001;
       if (mouseDampening > 0) {
         if (!lastTimeRef.current) lastTimeRef.current = t;
@@ -328,6 +341,7 @@ const Ferrofluid = ({
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (mouseInteraction) canvas.removeEventListener('pointermove', onPointerMove);
+      observer.disconnect();
       ro.disconnect();
       if (canvas.parentElement === container) {
         container.removeChild(canvas);

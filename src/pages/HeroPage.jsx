@@ -19,7 +19,8 @@ export default function HeroPage() {
           opacity={1} 
           mouseInteraction 
           mouseStrength={0.9} 
-          mouseRadius={0.35} 
+          mouseRadius={0.35}
+          dpr={Math.min(window.devicePixelRatio || 1, 1.5)}
         /> 
       </div>
 

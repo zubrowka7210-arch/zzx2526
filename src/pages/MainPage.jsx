@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import BlurText from "../components/BlurText";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import AboutPage from "./AboutPage";
+
+const AboutPage = lazy(() => import("./AboutPage"));
 
 const PAGES = ["hero", "about"];
 const TRANSITION_DURATION = 0.8;
@@ -18,6 +19,7 @@ const pageVariants = {
 export default function MainPage() {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const total = PAGES.length;
   const isTransitioning = useRef(false);
   const lastScrollTime = useRef(0);
@@ -90,13 +92,20 @@ export default function MainPage() {
         >
           {page === 0 && (
             <section className="relative w-full h-screen overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-stone-900/50 via-stone-800/30 to-stone-900/60" />
+              
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-                poster="/hero/背景视频.mp4"
+                preload="metadata"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                onLoadedData={(e) => {
+                  setVideoLoaded(true);
+                  e.target.play().catch(() => {});
+                }}
+                onError={() => setVideoLoaded(true)}
               >
                 <source src="/hero/背景视频.mp4" type="video/mp4" />
               </video>
@@ -156,7 +165,9 @@ export default function MainPage() {
           )}
 
           {page === 1 && (
-            <AboutPage />
+            <Suspense fallback={<div className="text-stone-400">Loading...</div>}>
+              <AboutPage />
+            </Suspense>
           )}
         </motion.div>
       </AnimatePresence>

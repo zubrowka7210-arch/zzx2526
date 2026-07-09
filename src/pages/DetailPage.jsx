@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import DetailLeftSection, { ProgressCircle } from "../components/DetailLeftSection.jsx";
@@ -98,6 +98,7 @@ export default function DetailPage() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [fullscreenImages, setFullscreenImages] = useState(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
+  const scrollContainerRef = useRef(null);
 
   const handleOpenFullscreen = (images, index) => {
     setFullscreenImages(images);
@@ -110,7 +111,6 @@ export default function DetailPage() {
 
   const pageData = getDetailPageData(pageId || "page01");
 
-  // 根据 pageId 计算对应的 pageIndex 和颜色
   const pageIndex =
     {
       page01: 0,
@@ -121,23 +121,38 @@ export default function DetailPage() {
   const grainientConfig = PAGE_GRAINIENT_CONFIG[pageIndex];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const container = scrollContainerRef.current;
+    const scroller = container || window;
 
-      if (scrollHeight > 0) {
-        const percentage = Math.round(Math.min((scrollTop / scrollHeight) * 100, 100));
+    const handleScroll = () => {
+      let scrollTop, scrollHeight, clientHeight;
+
+      if (container) {
+        scrollTop = container.scrollTop;
+        scrollHeight = container.scrollHeight;
+        clientHeight = container.clientHeight;
+      } else {
+        scrollTop = window.scrollY;
+        scrollHeight = document.documentElement.scrollHeight;
+        clientHeight = window.innerHeight;
+      }
+
+      const scrollableHeight = scrollHeight - clientHeight;
+
+      if (scrollableHeight > 0) {
+        const percentage = Math.round(Math.min((scrollTop / scrollableHeight) * 100, 100));
         setScrollPercentage(percentage);
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    scroller.addEventListener("scroll", handleScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
       <div
+        ref={scrollContainerRef}
         className="w-full min-h-screen relative flex flex-col p-4 md:px-10 md:pt-16 md:pb-4 select-none"
         style={{
           fontFamily: '"Inter", sans-serif',
