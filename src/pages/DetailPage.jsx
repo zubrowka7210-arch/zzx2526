@@ -120,8 +120,9 @@ export default function DetailPage() {
 
   const grainientConfig = PAGE_GRAINIENT_CONFIG[pageIndex];
 
-  useLenis(({ progress }) => {
-    setScrollPercentage(Math.round(progress * 100));
+  useLenis((lenis) => {
+    console.log('Lenis progress:', lenis.progress, 'scroll:', lenis.scroll, 'limit:', lenis.limit);
+    setScrollPercentage(Math.round(lenis.progress * 100));
   });
 
   return (
