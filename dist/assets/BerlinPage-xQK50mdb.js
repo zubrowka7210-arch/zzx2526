@@ -1,4 +1,4 @@
-import{r as u,j as e,L as x}from"./index-C9c5MsS5.js";import{N}from"./Navbar-KCe4_8AW.js";import{G as A}from"./Grainient-D4NIZOt_.js";const R=()=>{const j=u.useRef(null),n=u.useRef(0),g=u.useRef(0),[b,S]=u.useState({left:[0,1,2,3],right:[.5,1.5,2.5,3.5]}),w=[{title:`河源
+import{r as u,j as e,L as x}from"./index-7kbvzokN.js";import{N}from"./Navbar-BpI-B7wi.js";import{G as A}from"./Grainient-zW8irfTr.js";const R=()=>{const j=u.useRef(null),n=u.useRef(0),g=u.useRef(0),[b,S]=u.useState({left:[0,1,2,3],right:[.5,1.5,2.5,3.5]}),w=[{title:`河源
 文旅`,no:"N. 01",year:"Y. 2025",image:"/case1 heyuan/hy01.png",detailId:"page01"},{title:`智能
 配乐`,no:"N. 02",year:"Y. 2025",image:"/case2 music/花鸟.png",detailId:"page02"},{title:`其他
 作品`,no:"N. 03",year:"Y. 2025",image:"/other/设计2-1.png",detailId:"page03"},{title:`其他

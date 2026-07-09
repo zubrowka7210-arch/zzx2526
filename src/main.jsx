@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Lenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 import "./styles/global.css";
 
 const App = lazy(() => import("./App.jsx"));
@@ -18,15 +20,17 @@ const Loading = () => (
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/home" element={<App />} />
-        <Route path="/project/:pageId" element={<ProjectPage />} />
-        <Route path="/berlin" element={<BerlinPage />} />
-        <Route path="/detail/:pageId" element={<DetailPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-    </Suspense>
+    <Lenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true, smoothTouch: true }}>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/home" element={<App />} />
+          <Route path="/project/:pageId" element={<ProjectPage />} />
+          <Route path="/berlin" element={<BerlinPage />} />
+          <Route path="/detail/:pageId" element={<DetailPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </Suspense>
+    </Lenis>
   </BrowserRouter>,
 );

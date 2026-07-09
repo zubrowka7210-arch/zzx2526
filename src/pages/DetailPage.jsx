@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useLenis } from "lenis/react";
 import Navbar from "../components/Navbar.jsx";
 import DetailLeftSection, { ProgressCircle } from "../components/DetailLeftSection.jsx";
 import DetailRightSection from "../components/DetailRightSection.jsx";
@@ -98,7 +99,6 @@ export default function DetailPage() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [fullscreenImages, setFullscreenImages] = useState(null);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
-  const scrollContainerRef = useRef(null);
 
   const handleOpenFullscreen = (images, index) => {
     setFullscreenImages(images);
@@ -120,39 +120,13 @@ export default function DetailPage() {
 
   const grainientConfig = PAGE_GRAINIENT_CONFIG[pageIndex];
 
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    const scroller = container || window;
-
-    const handleScroll = () => {
-      let scrollTop, scrollHeight, clientHeight;
-
-      if (container) {
-        scrollTop = container.scrollTop;
-        scrollHeight = container.scrollHeight;
-        clientHeight = container.clientHeight;
-      } else {
-        scrollTop = window.scrollY;
-        scrollHeight = document.documentElement.scrollHeight;
-        clientHeight = window.innerHeight;
-      }
-
-      const scrollableHeight = scrollHeight - clientHeight;
-
-      if (scrollableHeight > 0) {
-        const percentage = Math.round(Math.min((scrollTop / scrollableHeight) * 100, 100));
-        setScrollPercentage(percentage);
-      }
-    };
-
-    scroller.addEventListener("scroll", handleScroll, { passive: true });
-    return () => scroller.removeEventListener("scroll", handleScroll);
-  }, []);
+  useLenis(({ progress }) => {
+    setScrollPercentage(Math.round(progress * 100));
+  });
 
   return (
     <>
       <div
-        ref={scrollContainerRef}
         className="w-full min-h-screen relative flex flex-col p-4 md:px-10 md:pt-16 md:pb-4 select-none"
         style={{
           fontFamily: '"Inter", sans-serif',
