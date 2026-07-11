@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { useLenis } from "lenis/react";
 import BlurText from "../components/BlurText";
 import Grainient from "../components/Grainient";
 import Navbar from "../components/Navbar";
@@ -7,6 +8,7 @@ import Navbar from "../components/Navbar";
 export default function AboutPage() {
   const navigate = useNavigate();
   const isTransitioning = useRef(false);
+  const lenis = useLenis();
 
   useEffect(() => {
     const handleWheel = (e) => {
@@ -19,10 +21,12 @@ export default function AboutPage() {
     };
 
     window.addEventListener("wheel", handleWheel, { passive: true });
+    lenis?.stop();
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      lenis?.start();
     };
-  }, [navigate]);
+  }, [navigate, lenis]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden font-sans" style={{ fontFamily: '"Inter", sans-serif', color: "#1c1917" }}>

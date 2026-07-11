@@ -20,7 +20,7 @@ const Loading = () => (
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Lenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true, smoothTouch: true }}>
+    <Lenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<MainPage />} />

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useLenis } from "lenis/react";
 
 const BerlinBackground = () => {
   const containerRef = useRef(null);
@@ -9,6 +10,7 @@ const BerlinBackground = () => {
     left: [0, 1, 2, 3],
     right: [0.5, 1.5, 2.5, 3.5],
   });
+  const lenis = useLenis();
 
   // 数据源
   const PROJECT_DATA = [
@@ -51,6 +53,7 @@ const BerlinBackground = () => {
     window.addEventListener("wheel", handleWheel, { passive: true });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    lenis?.stop();
 
     const animate = () => {
       // 应用摩擦力
@@ -95,8 +98,9 @@ const BerlinBackground = () => {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
+      lenis?.start();
     };
-  }, []);
+  }, [lenis]);
 
   const renderCircle = (index, isText, track, position) => {
     const baseY = position * (CONFIG.size + CONFIG.gap);

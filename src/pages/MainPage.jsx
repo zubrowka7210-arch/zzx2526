@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import BlurText from "../components/BlurText";
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 
 const AboutPage = lazy(() => import("./AboutPage"));
 
@@ -24,6 +25,7 @@ export default function MainPage() {
   const isTransitioning = useRef(false);
   const lastScrollTime = useRef(0);
   const accumulatedDelta = useRef(0);
+  const lenis = useLenis();
 
   const goNext = () => {
     if (isTransitioning.current || page >= total - 1) return;
@@ -69,10 +71,12 @@ export default function MainPage() {
     };
 
     window.addEventListener("wheel", handleWheel, { passive: true });
+    lenis?.stop();
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      lenis?.start();
     };
-  }, [page]);
+  }, [page, lenis]);
 
   return (
     <div className="relative w-full overflow-x-hidden font-sans" style={{ fontFamily: '"Inter", sans-serif', color: "#1c1917" }}>
@@ -139,7 +143,7 @@ export default function MainPage() {
                   delay={150}
                   animateBy="letters"
                   direction="bottom"
-                  className="text-[clamp(8rem,25vw,20rem)] text-[#FFEAEA] leading-[1.5] tracking-[0.15em]"
+                  className="text-[clamp(6rem,18vw,14rem)] text-[#FFEAEA] leading-[1.5] tracking-[0.15em]"
                   style={{ fontFamily: '"MFZhuoYingNoncommercial", "HYQiHei", serif', fontWeight: 'normal' }}
                 />
 
